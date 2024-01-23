@@ -136,7 +136,7 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
                 target_modality_initial=target_modality[0],
             )
             self.log(f"{prefix}_{str_s2t}_loss", s2t_loss, logger=True, sync_dist=True)
-            loss_output += s2t_loss
+            loss_output += s2t_loss #equals to loss_output = loss_output + s2t_loss, to accumulate the loss
 
         self.log(f"{prefix}_loss", loss_output, logger=True, sync_dist=True)
         return loss_output

@@ -1,2 +1,5 @@
 __pycache__/
 saved/
+*.0
+*.xml
+*.xml

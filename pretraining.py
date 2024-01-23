@@ -135,7 +135,7 @@ def train(configs):
 
     for modality in list_modalities:
         if modality in freeze_modalities:
-            modality_to_encoder[modality].eval()
+            modality_to_encoder[modality].eval() #.eval() is to freeze the model
             print("Freezing modality: ", modality)
             modality_to_encoder[modality].freeze()
 
@@ -158,14 +158,14 @@ def train(configs):
     # Initialize Trainer
     trainer = pl.Trainer(
         max_epochs=max_epochs,
-        gpus=gpus,
+        accelerator=gpus,
         strategy=trainer_strategy,
         limit_train_batches=limit_train_batches,
         enable_checkpointing=True,
         callbacks=[checkpoint_callback],
     )
 
-    if not test_only:
+    if not test_only: #this if not is to skip training and only test
         # Start training
         print("Start training: [%s] ..." % path_save_checkpoint)
         trainer.fit(model, datamodule=datamodule)

@@ -16,7 +16,7 @@ train_hparams:
   limit_train_batches: 1.0
   batch_size: 32
   max_epochs: 5
-  gpus: 1
+  gpus: cpu
   num_workers_for_dm: 10
   test_only: False
   trainer_strategy: "ddp"
